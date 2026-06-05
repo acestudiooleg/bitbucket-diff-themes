@@ -17,6 +17,27 @@ function langForPath(path) {
   return EXT_TO_LANG[ext] || null;
 }
 
+function highlightElement(el, lang, Prism, cache) {
+  if (el.hasAttribute('data-bdt-done')) return;
+  if (cache && !cache.has(el)) cache.set(el, el.innerHTML);
+  if (lang && Prism && Prism.languages[lang]) {
+    try {
+      el.innerHTML = Prism.highlight(el.textContent, Prism.languages[lang], lang);
+    } catch (e) {
+      /* leave raw text on failure */
+    }
+  }
+  el.setAttribute('data-bdt-done', '');
+}
+
+function restoreElement(el, cache) {
+  if (cache && cache.has(el)) {
+    el.innerHTML = cache.get(el);
+    cache.delete(el);
+  }
+  el.removeAttribute('data-bdt-done');
+}
+
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { EXT_TO_LANG, langForPath };
+  module.exports = { EXT_TO_LANG, langForPath, highlightElement, restoreElement };
 }
