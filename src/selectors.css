@@ -1,60 +1,63 @@
 /* Maps Bitbucket Cloud diff selectors to --bdt-* custom properties.
    Values come from the dynamically injected #bdt-vars block.
-   !important is required to beat Atlassian's atomic/inline styles. */
+   Every rule is gated on html[data-bdt-on] (set/removed by content.js) so the
+   !important declarations apply ONLY while the extension is enabled — otherwise
+   the undefined --bdt-* vars would resolve to `unset !important` and clobber
+   Bitbucket's native styling. !important is required to beat Atlassian's atomic CSS. */
 
 /* Typography on code cells */
-.code-component,
-.code-diff {
+html[data-bdt-on] .code-component,
+html[data-bdt-on] .code-diff {
   font-family: var(--bdt-font-family) !important;
   font-size: var(--bdt-font-size) !important;
   line-height: var(--bdt-line-height) !important;
 }
 
 /* Base code color */
-.code-diff { color: var(--bdt-fg) !important; }
+html[data-bdt-on] .code-diff { color: var(--bdt-fg) !important; }
 
 /* Prism token roles */
-.code-diff .token.keyword,
-.code-diff .token.tag,
-.code-diff .token.selector { color: var(--bdt-keyword) !important; }
-.code-diff .token.operator,
-.code-diff .token.entity,
-.code-diff .token.url { color: var(--bdt-operator) !important; }
-.code-diff .token.string,
-.code-diff .token.char,
-.code-diff .token.attr-value,
-.code-diff .token.template-string { color: var(--bdt-string) !important; }
-.code-diff .token.comment,
-.code-diff .token.doc-comment,
-.code-diff .token.prolog { color: var(--bdt-comment) !important; font-style: italic; }
-.code-diff .token.function,
-.code-diff .token.function-variable { color: var(--bdt-function) !important; }
-.code-diff .token.number,
-.code-diff .token.boolean,
-.code-diff .token.constant,
-.code-diff .token.symbol { color: var(--bdt-number) !important; }
-.code-diff .token.class-name,
-.code-diff .token.maybe-class-name,
-.code-diff .token.builtin { color: var(--bdt-class) !important; }
-.code-diff .token.punctuation,
-.code-diff .token.interpolation-punctuation,
-.code-diff .token.template-punctuation { color: var(--bdt-punctuation) !important; }
-.code-diff .token.property,
-.code-diff .token.literal-property,
-.code-diff .token.property-access,
-.code-diff .token.attr-name { color: var(--bdt-fg) !important; }
+html[data-bdt-on] .code-diff .token.keyword,
+html[data-bdt-on] .code-diff .token.tag,
+html[data-bdt-on] .code-diff .token.selector { color: var(--bdt-keyword) !important; }
+html[data-bdt-on] .code-diff .token.operator,
+html[data-bdt-on] .code-diff .token.entity,
+html[data-bdt-on] .code-diff .token.url { color: var(--bdt-operator) !important; }
+html[data-bdt-on] .code-diff .token.string,
+html[data-bdt-on] .code-diff .token.char,
+html[data-bdt-on] .code-diff .token.attr-value,
+html[data-bdt-on] .code-diff .token.template-string { color: var(--bdt-string) !important; }
+html[data-bdt-on] .code-diff .token.comment,
+html[data-bdt-on] .code-diff .token.doc-comment,
+html[data-bdt-on] .code-diff .token.prolog { color: var(--bdt-comment) !important; font-style: italic; }
+html[data-bdt-on] .code-diff .token.function,
+html[data-bdt-on] .code-diff .token.function-variable { color: var(--bdt-function) !important; }
+html[data-bdt-on] .code-diff .token.number,
+html[data-bdt-on] .code-diff .token.boolean,
+html[data-bdt-on] .code-diff .token.constant,
+html[data-bdt-on] .code-diff .token.symbol { color: var(--bdt-number) !important; }
+html[data-bdt-on] .code-diff .token.class-name,
+html[data-bdt-on] .code-diff .token.maybe-class-name,
+html[data-bdt-on] .code-diff .token.builtin { color: var(--bdt-class) !important; }
+html[data-bdt-on] .code-diff .token.punctuation,
+html[data-bdt-on] .code-diff .token.interpolation-punctuation,
+html[data-bdt-on] .code-diff .token.template-punctuation { color: var(--bdt-punctuation) !important; }
+html[data-bdt-on] .code-diff .token.property,
+html[data-bdt-on] .code-diff .token.literal-property,
+html[data-bdt-on] .code-diff .token.property-access,
+html[data-bdt-on] .code-diff .token.attr-name { color: var(--bdt-fg) !important; }
 
 /* Diff line backgrounds */
-.line-wrapper.type-add { background: var(--bdt-add-bg) !important; }
-.line-wrapper.type-del { background: var(--bdt-del-bg) !important; }
-.line-wrapper.type-normal { background: var(--bdt-bg) !important; }
+html[data-bdt-on] .line-wrapper.type-add { background: var(--bdt-add-bg) !important; }
+html[data-bdt-on] .line-wrapper.type-del { background: var(--bdt-del-bg) !important; }
+html[data-bdt-on] .line-wrapper.type-normal { background: var(--bdt-bg) !important; }
 
 /* Gutter colors */
-.added-color { color: var(--bdt-add-gutter) !important; }
-.removed-color { color: var(--bdt-del-gutter) !important; }
+html[data-bdt-on] .added-color { color: var(--bdt-add-gutter) !important; }
+html[data-bdt-on] .removed-color { color: var(--bdt-del-gutter) !important; }
 
 /* Hunk header */
-.chunk-heading {
+html[data-bdt-on] .chunk-heading {
   background: var(--bdt-hunk-bg) !important;
   color: var(--bdt-hunk-fg) !important;
 }

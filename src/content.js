@@ -1,6 +1,5 @@
 // src/content.js — orchestrates highlighting + theming on Bitbucket PR diffs.
 (function () {
-  const SELECTORS_STYLE_ID = 'bdt-selectors-marker'; // CSS file already injected via manifest
   const VARS_STYLE_ID = 'bdt-vars';
   const cache = new WeakMap();
   let settings = null;
