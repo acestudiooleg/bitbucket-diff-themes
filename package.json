@@ -1,0 +1,15 @@
+{
+  "name": "bitbucket-diff-themes",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Self-contained dark syntax-highlighting themes for Bitbucket Cloud PR diffs",
+  "scripts": {
+    "vendor:prism": "esbuild scripts/prism-entry.js --bundle --minify --format=iife --outfile=vendor/prism.js",
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "esbuild": "^0.21.0",
+    "jsdom": "^24.0.0",
+    "prismjs": "^1.29.0"
+  }
+}
