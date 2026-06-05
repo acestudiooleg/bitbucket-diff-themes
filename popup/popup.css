@@ -1,0 +1,9 @@
+body { width: 280px; margin: 0; padding: 12px 14px; font: 13px/1.4 system-ui, sans-serif;
+  background: #1e1e1e; color: #e8e8e8; }
+h1 { font-size: 14px; margin: 0 0 12px; }
+.row { display: grid; grid-template-columns: 88px 1fr auto; align-items: center;
+  gap: 8px; margin: 10px 0; }
+.row span { color: #b6b6b6; }
+select, input[type="range"] { width: 100%; }
+output { min-width: 34px; text-align: right; color: #b6b6b6; }
+input[type="checkbox"] { justify-self: start; }
