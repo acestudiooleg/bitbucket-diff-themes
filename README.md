@@ -5,6 +5,8 @@ themes** to Bitbucket Cloud pull-request diffs. It recolors the existing syntax
 tokens and diff lines via CSS — pick a palette, tweak typography, toggle on/off
 from the popup. Changes apply live, no page reload.
 
+![Bitbucket Diff Themes — Monokai preview and the 11 included palettes](docs/preview.png)
+
 ## Why CSS-only
 
 Bitbucket renders diffs with React. An earlier version generated its own syntax
