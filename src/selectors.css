@@ -75,14 +75,18 @@ html[data-bdt-on] .line-wrapper.type-normal { background: var(--bdt-bg) !importa
    while the syntax colors stay readable. color-mix is supported in Chrome; if it
    ever isn't, the rule is ignored and Bitbucket's default applies. */
 html[data-bdt-on] .code-diff ins {
-  background: color-mix(in srgb, var(--bdt-add-gutter) 30%, transparent) !important;
+  background: linear-gradient(
+    color-mix(in srgb, var(--bdt-add-gutter) 32%, transparent),
+    color-mix(in srgb, var(--bdt-add-gutter) 32%, transparent)
+  ) no-repeat center / 100% 1.25em !important;
   text-decoration: none;
-  border-radius: 2px;
 }
 html[data-bdt-on] .code-diff del {
-  background: color-mix(in srgb, var(--bdt-del-gutter) 30%, transparent) !important;
+  background: linear-gradient(
+    color-mix(in srgb, var(--bdt-del-gutter) 32%, transparent),
+    color-mix(in srgb, var(--bdt-del-gutter) 32%, transparent)
+  ) no-repeat center / 100% 1.25em !important;
   text-decoration: none;
-  border-radius: 2px;
 }
 
 /* Gutter line-number colors (context numbers themed so they stay legible on the
