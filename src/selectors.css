@@ -41,7 +41,8 @@ html[data-bdt-on] .code-diff .token.maybe-class-name,
 html[data-bdt-on] .code-diff .token.known-class-name,
 html[data-bdt-on] .code-diff .token.builtin {
   color: var(--bdt-class) !important;
-  font-style: italic; /* Monokai signature: type/class names are italic */
+  font-style: italic; /* Monokai signature: type/class names are italic + underlined */
+  text-decoration: underline;
 }
 html[data-bdt-on] .code-diff .token.punctuation,
 html[data-bdt-on] .code-diff .token.interpolation-punctuation,
