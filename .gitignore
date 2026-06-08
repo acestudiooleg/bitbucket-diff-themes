@@ -1,5 +1,5 @@
 node_modules/
 
-# Local debug captures
-*.log
-*.html
+# Local debug captures (saved Bitbucket pages / console logs in the repo root)
+/*.log
+/*.html
