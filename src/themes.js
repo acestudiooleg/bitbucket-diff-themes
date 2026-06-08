@@ -19,6 +19,13 @@ const THEMES = {
     punctuation: '#939293', addBg: 'rgba(169,220,118,0.10)', addGutter: '#a9dc76',
     delBg: 'rgba(255,97,136,0.13)', delGutter: '#ff6188', hunkBg: '#403e41', hunkFg: '#727072',
   },
+  githubLight: {
+    label: 'GitHub Light', bg: '#ffffff', fg: '#1f2328', keyword: '#cf222e',
+    operator: '#1f2328', string: '#0a3069', comment: '#6e7781',
+    function: '#8250df', number: '#0550ae', class: '#953800',
+    punctuation: '#1f2328', addBg: 'rgba(31,136,61,0.12)', addGutter: '#1a7f37',
+    delBg: 'rgba(207,34,46,0.10)', delGutter: '#cf222e', hunkBg: '#ddf4ff', hunkFg: '#0550ae',
+  },
   onedark: {
     label: 'One Dark', bg: '#282c34', fg: '#abb2bf', keyword: '#c678dd',
     operator: '#56b6c2', string: '#98c379', comment: '#5c6370',

@@ -2,11 +2,12 @@ const { test } = require('node:test');
 const assert = require('node:assert');
 const { THEMES, THEME_ROLES } = require('../src/themes.js');
 
-test('exactly 10 themes, monokai + monokaiPro present', () => {
+test('exactly 11 themes, monokai + monokaiPro + githubLight present', () => {
   const keys = Object.keys(THEMES);
-  assert.strictEqual(keys.length, 10);
+  assert.strictEqual(keys.length, 11);
   assert.ok(keys.includes('monokai'));
   assert.ok(keys.includes('monokaiPro'));
+  assert.ok(keys.includes('githubLight'));
 });
 
 test('every theme defines every role with a non-empty color', () => {
