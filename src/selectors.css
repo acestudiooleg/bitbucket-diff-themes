@@ -38,7 +38,11 @@ html[data-bdt-on] .code-diff .token.constant,
 html[data-bdt-on] .code-diff .token.symbol { color: var(--bdt-number) !important; }
 html[data-bdt-on] .code-diff .token.class-name,
 html[data-bdt-on] .code-diff .token.maybe-class-name,
-html[data-bdt-on] .code-diff .token.builtin { color: var(--bdt-class) !important; }
+html[data-bdt-on] .code-diff .token.known-class-name,
+html[data-bdt-on] .code-diff .token.builtin {
+  color: var(--bdt-class) !important;
+  font-style: italic; /* Monokai signature: type/class names are italic */
+}
 html[data-bdt-on] .code-diff .token.punctuation,
 html[data-bdt-on] .code-diff .token.interpolation-punctuation,
 html[data-bdt-on] .code-diff .token.template-punctuation { color: var(--bdt-punctuation) !important; }
