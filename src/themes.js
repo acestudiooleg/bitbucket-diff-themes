@@ -12,6 +12,13 @@ const THEMES = {
     punctuation: '#f8f8f2', addBg: 'rgba(166,226,46,0.10)', addGutter: '#a6e22e',
     delBg: 'rgba(249,38,114,0.12)', delGutter: '#f92672', hunkBg: '#3e3d32', hunkFg: '#75715e',
   },
+  monokaiPro: {
+    label: 'Monokai Pro', bg: '#2d2a2e', fg: '#fcfcfa', keyword: '#ff6188',
+    operator: '#ff6188', string: '#ffd866', comment: '#727072',
+    function: '#a9dc76', number: '#ab9df2', class: '#78dce8',
+    punctuation: '#939293', addBg: 'rgba(169,220,118,0.10)', addGutter: '#a9dc76',
+    delBg: 'rgba(255,97,136,0.13)', delGutter: '#ff6188', hunkBg: '#403e41', hunkFg: '#727072',
+  },
   onedark: {
     label: 'One Dark', bg: '#282c34', fg: '#abb2bf', keyword: '#c678dd',
     operator: '#56b6c2', string: '#98c379', comment: '#5c6370',
