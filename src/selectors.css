@@ -47,14 +47,14 @@ html[data-bdt-on] .code-diff .token.literal-property,
 html[data-bdt-on] .code-diff .token.property-access,
 html[data-bdt-on] .code-diff .token.attr-name { color: var(--bdt-fg) !important; }
 
-/* Diff SURFACE backgrounds — the code area + gutter must be the theme bg so that
-   (a) the near-white code text is legible even when Bitbucket itself is in light
-   mode, and (b) the translucent add/del tints below sit over a dark base instead
-   of Bitbucket's light background. Scoped to code/gutter containers only — NOT the
-   file headers or the whole Diff region, whose text Bitbucket colors itself. */
+/* Diff SURFACE base — a dark canvas placed ONLY on containers ABOVE the line row
+   (.line-wrapper's ancestors). This gives the near-white code text a dark backdrop
+   even when Bitbucket is in light mode, while the per-line add/del tints below —
+   which live ON .line-wrapper — composite over it and stay visible.
+   IMPORTANT: do NOT paint .line-wrapper's descendants (pre.code-component,
+   .line-numbers) — a solid bg there would cover the row's add/del tint and erase
+   the diff distinction. Leave them transparent so the tint shows through. */
 html[data-bdt-on] .lines-wrapper,
-html[data-bdt-on] pre.code-component,
-html[data-bdt-on] .line-numbers,
 html[data-bdt-on] .diff-chunk,
 html[data-bdt-on] .chunk-wrapper { background: var(--bdt-bg) !important; }
 
