@@ -76,15 +76,15 @@ html[data-bdt-on] .line-wrapper.type-normal { background: var(--bdt-bg) !importa
    ever isn't, the rule is ignored and Bitbucket's default applies. */
 html[data-bdt-on] .code-diff ins {
   background: linear-gradient(
-    color-mix(in srgb, var(--bdt-add-gutter) 32%, transparent),
-    color-mix(in srgb, var(--bdt-add-gutter) 32%, transparent)
+    color-mix(in srgb, var(--bdt-add-gutter) 20%, transparent),
+    color-mix(in srgb, var(--bdt-add-gutter) 20%, transparent)
   ) no-repeat center / 100% 1.25em !important;
   text-decoration: none;
 }
 html[data-bdt-on] .code-diff del {
   background: linear-gradient(
-    color-mix(in srgb, var(--bdt-del-gutter) 32%, transparent),
-    color-mix(in srgb, var(--bdt-del-gutter) 32%, transparent)
+    color-mix(in srgb, var(--bdt-del-gutter) 20%, transparent),
+    color-mix(in srgb, var(--bdt-del-gutter) 20%, transparent)
   ) no-repeat center / 100% 1.25em !important;
   text-decoration: none;
 }
