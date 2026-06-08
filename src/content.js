@@ -1,80 +1,43 @@
-// src/content.js — orchestrates highlighting + theming on Bitbucket PR diffs.
+// src/content.js — CSS-only theming for Bitbucket PR diffs.
+//
+// Bitbucket renders diffs with React. Mutating React-owned nodes (e.g. rewriting
+// a line's innerHTML) corrupts the reconciler and crashes the page with
+// "removeChild: node is not a child" errors. So this script performs ZERO
+// per-node DOM mutation. It only:
+//   1. injects a single <style id="bdt-vars"> holding the chosen palette's
+//      CSS custom properties + typography, and
+//   2. toggles a [data-bdt-on] attribute on <html> (which React does not own).
+// selectors.css (injected by the manifest) recolors the diff's existing token
+// spans + line backgrounds, gated on html[data-bdt-on]. CSS is declarative, so it
+// styles current and future diff rows automatically — no MutationObserver needed.
 (function () {
   const VARS_STYLE_ID = 'bdt-vars';
-  const cache = new WeakMap();
   let settings = null;
-  let observer = null;
-
-  function typographyOf(s) {
-    return { fontSize: s.fontSize, lineHeight: s.lineHeight, fontFamily: s.fontFamily };
-  }
 
   function applyVars() {
     let style = document.getElementById(VARS_STYLE_ID);
     if (!style) {
       style = document.createElement('style');
       style.id = VARS_STYLE_ID;
-      document.documentElement.appendChild(style);
+      (document.head || document.documentElement).appendChild(style);
     }
     const theme = THEMES[settings.theme] || THEMES.monokai;
-    style.textContent = buildThemeVars(theme, typographyOf(settings));
-  }
-
-  function removeVars() {
-    const style = document.getElementById(VARS_STYLE_ID);
-    if (style) style.remove();
-  }
-
-  function langForLine(lineEl) {
-    const article = lineEl.closest('[data-qa="branch-diff-file"]');
-    if (!article) return null;
-    const label = article.getAttribute('aria-label') || '';
-    const path = label.replace(/^Diff of file\s+/, '').trim();
-    return langForPath(path);
-  }
-
-  function highlightAll(root) {
-    const lines = (root || document).querySelectorAll('.code-diff:not([data-bdt-done])');
-    lines.forEach((el) => highlightElement(el, langForLine(el), Prism, cache));
-  }
-
-  function restoreAll() {
-    document.querySelectorAll('.code-diff[data-bdt-done]').forEach((el) => restoreElement(el, cache));
-  }
-
-  function startObserver() {
-    const region = document.querySelector('[role="region"][aria-label="Diff"]') || document.body;
-    observer = new MutationObserver((mutations) => {
-      for (const m of mutations) {
-        for (const node of m.addedNodes) {
-          if (node.nodeType !== 1) continue;
-          if (node.matches && node.matches('.code-diff')) {
-            highlightElement(node, langForLine(node), Prism, cache);
-          } else if (node.querySelectorAll) {
-            highlightAll(node);
-          }
-        }
-      }
+    style.textContent = buildThemeVars(theme, {
+      fontSize: settings.fontSize,
+      lineHeight: settings.lineHeight,
+      fontFamily: settings.fontFamily,
     });
-    observer.observe(region, { childList: true, subtree: true });
-  }
-
-  function stopObserver() {
-    if (observer) { observer.disconnect(); observer = null; }
   }
 
   function enable() {
-    document.documentElement.setAttribute('data-bdt-on', '');
     applyVars();
-    highlightAll(document);
-    if (!observer) startObserver();
+    document.documentElement.setAttribute('data-bdt-on', '');
   }
 
   function disable() {
     document.documentElement.removeAttribute('data-bdt-on');
-    stopObserver();
-    removeVars();
-    restoreAll();
+    const style = document.getElementById(VARS_STYLE_ID);
+    if (style) style.remove();
   }
 
   function applyState() {
@@ -82,31 +45,18 @@
     else disable();
   }
 
-  // Boot
+  // Boot: load settings, apply.
   chrome.storage.sync.get(null, (stored) => {
     settings = withDefaults(stored);
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', applyState, { once: true });
-    } else {
-      applyState();
-    }
+    applyState();
   });
 
-  // React to popup changes
+  // React to popup changes (theme, typography, on/off) — live, no reload.
   chrome.storage.onChanged.addListener((changes, area) => {
     if (area !== 'sync' || !settings) return;
-    const next = withDefaults(Object.assign({}, settings, mapChanges(changes)));
-    const wasEnabled = settings.enabled;
-    settings = next;
-    if (!settings.enabled) { disable(); return; }
-    if (!wasEnabled) { enable(); return; }
-    // Enabled before and after: just refresh vars (theme/typography may have changed).
-    applyVars();
+    const patch = {};
+    for (const key of Object.keys(changes)) patch[key] = changes[key].newValue;
+    settings = withDefaults(Object.assign({}, settings, patch));
+    applyState();
   });
-
-  function mapChanges(changes) {
-    const out = {};
-    for (const key of Object.keys(changes)) out[key] = changes[key].newValue;
-    return out;
-  }
 })();

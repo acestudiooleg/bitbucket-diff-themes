@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Bitbucket Diff Themes",
-  "version": "0.1.0",
-  "description": "Self-contained dark syntax-highlighting themes for Bitbucket Cloud PR diffs.",
+  "version": "0.2.0",
+  "description": "Dark themes for Bitbucket Cloud PR diffs — recolors syntax + diff lines via CSS.",
   "permissions": ["storage"],
   "host_permissions": ["https://bitbucket.org/*"],
   "action": {
@@ -16,11 +16,9 @@
       "run_at": "document_idle",
       "css": ["src/selectors.css"],
       "js": [
-        "vendor/prism.js",
         "src/defaults.js",
         "src/themes.js",
         "src/theme-css.js",
-        "src/highlighter.js",
         "src/content.js"
       ]
     }
