@@ -3,3 +3,4 @@ node_modules/
 # Local debug captures (saved Bitbucket pages / console logs in the repo root)
 /*.log
 /*.html
+/*.png
