@@ -68,6 +68,23 @@ html[data-bdt-on] .line-wrapper.type-add { background: var(--bdt-add-bg) !import
 html[data-bdt-on] .line-wrapper.type-del { background: var(--bdt-del-bg) !important; }
 html[data-bdt-on] .line-wrapper.type-normal { background: var(--bdt-bg) !important; }
 
+/* Word-level (intra-line) diff highlights. Bitbucket wraps the actually-changed
+   words in <ins>/<del> and paints them with a bright default green/red that
+   clashes with the theme and hurts token contrast. Replace it with a stronger
+   tint of the theme's own add/del accent so the changed words pop within the row
+   while the syntax colors stay readable. color-mix is supported in Chrome; if it
+   ever isn't, the rule is ignored and Bitbucket's default applies. */
+html[data-bdt-on] .code-diff ins {
+  background: color-mix(in srgb, var(--bdt-add-gutter) 30%, transparent) !important;
+  text-decoration: none;
+  border-radius: 2px;
+}
+html[data-bdt-on] .code-diff del {
+  background: color-mix(in srgb, var(--bdt-del-gutter) 30%, transparent) !important;
+  text-decoration: none;
+  border-radius: 2px;
+}
+
 /* Gutter line-number colors (context numbers themed so they stay legible on the
    now-dark gutter) */
 html[data-bdt-on] .added-color { color: var(--bdt-add-gutter) !important; }
