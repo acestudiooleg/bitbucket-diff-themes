@@ -47,14 +47,28 @@ html[data-bdt-on] .code-diff .token.literal-property,
 html[data-bdt-on] .code-diff .token.property-access,
 html[data-bdt-on] .code-diff .token.attr-name { color: var(--bdt-fg) !important; }
 
-/* Diff line backgrounds */
+/* Diff SURFACE backgrounds — the code area + gutter must be the theme bg so that
+   (a) the near-white code text is legible even when Bitbucket itself is in light
+   mode, and (b) the translucent add/del tints below sit over a dark base instead
+   of Bitbucket's light background. Scoped to code/gutter containers only — NOT the
+   file headers or the whole Diff region, whose text Bitbucket colors itself. */
+html[data-bdt-on] .lines-wrapper,
+html[data-bdt-on] pre.code-component,
+html[data-bdt-on] .line-numbers,
+html[data-bdt-on] .diff-chunk,
+html[data-bdt-on] .chunk-wrapper { background: var(--bdt-bg) !important; }
+
+/* Diff line backgrounds (translucent tints over the dark surface above) */
 html[data-bdt-on] .line-wrapper.type-add { background: var(--bdt-add-bg) !important; }
 html[data-bdt-on] .line-wrapper.type-del { background: var(--bdt-del-bg) !important; }
 html[data-bdt-on] .line-wrapper.type-normal { background: var(--bdt-bg) !important; }
 
-/* Gutter colors */
+/* Gutter line-number colors (context numbers themed so they stay legible on the
+   now-dark gutter) */
 html[data-bdt-on] .added-color { color: var(--bdt-add-gutter) !important; }
 html[data-bdt-on] .removed-color { color: var(--bdt-del-gutter) !important; }
+html[data-bdt-on] .context-color,
+html[data-bdt-on] .context-color .line-number-permalink { color: var(--bdt-comment) !important; }
 
 /* Hunk header */
 html[data-bdt-on] .chunk-heading {
